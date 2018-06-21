@@ -10,21 +10,40 @@ router.get('/', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
-  console.log('body');
-  console.log(req.body);
-
-  res.type('json');
-  res.json(req.body);
-});
-
 router.get('/:userId', (req, res) => {
   res.type('json');
   const userId = String(req.params.userId);
-  User.find({ id: userId }, (err, obj) => {
-    res.json(obj);
+  User.find({ id: userId }, (err, result) => {
+    if (err) {
+      res.json(result);
+    } else {
+      res.json(err);
+    }
   });
 });
 
+router.post('/', (req, res) => {
+  res.type('json');
+  const user = new User({
+    id: req.body.id,
+    name: req.body.name,
+  });
+  user.save();
+  res.json({
+    result: 'OK',
+  });
+});
+
+router.delete('/:userId', (req, res) => {
+  res.type('json');
+  const userId = String(req.params.userId);
+  User.findOneAndRemove({ id: userId }, (err, result) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(result);
+    }
+  });
+});
 
 module.exports = router;

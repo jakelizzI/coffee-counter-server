@@ -11,8 +11,8 @@ mongoose.connection.on('connected', () => {
   console.log('connected');
 });
 
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', index);
 app.use('/users', users);
 

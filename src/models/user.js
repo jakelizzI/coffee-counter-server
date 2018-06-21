@@ -1,8 +1,16 @@
 import mongoose from 'mongoose';
 
 const usersSchema = mongoose.Schema({
-  id: String,
-  name: String,
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
 });
 
 module.exports = mongoose.model('users', usersSchema);
