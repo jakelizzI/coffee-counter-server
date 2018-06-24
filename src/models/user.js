@@ -9,7 +9,10 @@ const usersSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
+  },
+  balance: {
+    type: Number,
+    required: true,
   },
 });
 
